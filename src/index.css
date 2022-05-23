@@ -3,6 +3,7 @@
 @import url(./styles/vendor/fonts.css);
 
 @import url(./styles/blocks/page/page.css);
+@import url(./styles/blocks/page/__container/page__container.css);
 
 @import url(./styles/blocks/header/header.css);
 @import url(./styles/blocks/header/__logo/header__logo.css);

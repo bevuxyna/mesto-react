@@ -54,17 +54,15 @@ function App() {
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
             buttonText='Сохранить'
-            children={
-            <>
+        >
                 <input type="text" name="name" required placeholder="Имя" className="popup__input popup__input_type_name"
                    id="name" minLength="2" maxLength="40" />
                 <span className="popup__error name-error"></span>
                 <input type="text" name="about" required placeholder="О себе"
                    className="popup__input popup__input_type_about" id="about" minLength="2" maxLength="200" />
                 <span className="popup__error about-error"></span>
-            </>
-            }
-        />
+        </PopupWithForm>
+
 
         <PopupWithForm
             name={'avatar'}
@@ -72,13 +70,11 @@ function App() {
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             buttonText='Сохранить'
-            children={
-              <>
+        >
                 <input type="url" name="avatar" required placeholder="Ссылка на картинку" className="popup__input popup__input_type_avatar" id="avatar-link" />
                 <span className="popup__error avatar-link-error"></span>
-              </>
-            }
-        />
+        </PopupWithForm>
+
 
         <PopupWithForm
             name={'add'}
@@ -86,15 +82,12 @@ function App() {
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             buttonText='Создать'
-            children={
-              <>
+        >
                 <input type="text" name="name" required placeholder="Название" className="popup__input popup__input_type_place" id="place" minLength="2" maxLength="30" />
                 <span className="popup__error place-error"></span>
                 <input type="url" name="link" required placeholder="Ссылка на картинку" className="popup__input popup__input_type_link" id="link" />
                 <span className="popup__error link-error"></span>
-              </>
-            }
-        />
+        </PopupWithForm>
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 

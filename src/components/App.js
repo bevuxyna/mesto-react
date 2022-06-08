@@ -46,7 +46,7 @@ function App() {
                 setCards(cardsData);
             })
             .catch((err) => {
-                console.log(`Не удалось получить данные с сервера. ${err}`);
+                console.log(`Ошибка ${err}`);
             })
             .finally(() => {
 
@@ -59,6 +59,17 @@ function App() {
         api.changeLikeCardStatus(card._id, !isLiked)
             .then((newCard) => {
                 setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+            })
+            .catch((err) => {
+                console.log(`Ошибка ${err}`);
+            })
+    }
+
+    function handleCardDelete(card) {
+        api.deleteCard(card._id)
+            .then(() => {
+                //обновение стейта cards с помощью метода filter: создаём копию массива, исключив из него удалённую карточку
+                setCards((state) => state.filter((c) => c._id !== card._id && c));
             })
             .catch((err) => {
                 console.log(`Ошибка ${err}`);
@@ -78,6 +89,7 @@ function App() {
                       onAddPlace={handleAddPlaceClick}
                       onCardClick={handleCardClick}
                       onCardLike={handleCardLike}
+                      onCardDelete={handleCardDelete}
                   />
 
                   <Footer />

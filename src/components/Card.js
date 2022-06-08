@@ -7,14 +7,13 @@ function Card({card, onCardClick, onCardLike}) {
     const isOwn = card.owner._id === currentUser._id;
 
     const cardDeleteButtonClassName = (
-        `element__delete-button ${isOwn ? 'element__delete-button_visible' : 'element__delete-button_hidden'}`
+        `element__delete-button ${isOwn ? '' : 'element__delete-button_hidden'}`
     );
 
-    const isLiked = card.likes.some(item => item._id === currentUser._id);
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
 
     const cardLikeButtonClassName = `element__like-button ${isLiked ? 'element__like-button_active' : ''}`;
 
-    //пробрасываем обработчик handleCardClick сквозь компонент Main в виде пропса onCardClick
     function handleClick() {
         onCardClick(card);
     }
@@ -31,7 +30,7 @@ function Card({card, onCardClick, onCardLike}) {
             <div className="element__info">
                 <h2 className="element__title">{card.name}</h2>
                 <div className="element__like">
-                    <button className={cardLikeButtonClassName} type="button"></button>
+                    <button className={cardLikeButtonClassName} type="button" onClick={handleLikeClick}></button>
                     <p className="element__like-count">{card.likes.length}</p>
                 </div>
             </div>

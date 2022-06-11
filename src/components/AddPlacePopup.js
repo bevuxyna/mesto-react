@@ -35,6 +35,7 @@ function AddPlacePopup(props) {
             onClose={props.onClose}
             buttonText='Создать'
             onSubmit={handleSubmit}
+            onOverlayClose={props.onOverlayClose}
         >
             <input type="text" name="name" required placeholder="Название" className="popup__input popup__input_type_place" id="place" minLength="2" maxLength="30" value={name} onChange={handleCardName} />
             <span className="popup__error place-error"></span>

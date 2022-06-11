@@ -38,6 +38,7 @@ function EditProfilePopup(props) {
             onClose={props.onClose}
             buttonText='Сохранить'
             onSubmit={handleSubmit}
+            onOverlayClose={props.onOverlayClose}
         >
             <input type="text" name="name" required placeholder="Имя" className="popup__input popup__input_type_name"
                    id="name" minLength="2" maxLength="40" value={name || ''} onChange={handleNameChange} />

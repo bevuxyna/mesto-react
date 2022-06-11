@@ -16,8 +16,11 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+      setIsLoading(true);
+
       Promise.all([api.getUserInfo(), api.getInitialCards()])
             .then(([userData, cardsData]) => {
                 setCurrentUser(userData);
@@ -26,6 +29,9 @@ function App() {
             .catch((err) => {
                 console.log(`Ошибка ${err}`);
             })
+          .finally(() => {
+              setIsLoading(false);
+          })
   }, [])
 
   const handleEditAvatarClick = () => {
@@ -50,6 +56,25 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setSelectedCard({});
   };
+
+  function handleOverlayClose(evt) {
+      if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__button-close')) {
+            closeAllPopups();
+      }
+  }
+
+    //закрытие попапов по Esc
+  function handleEscClose(evt) {
+        if (evt.key === 'Escape') {
+            closeAllPopups();
+        }
+    }
+
+  useEffect(() => {
+      document.addEventListener("keydown", handleEscClose);
+      return () => document.removeEventListener("keydown", handleEscClose);
+  }, []);
+
 
   function handleUpdateUser(data) {
         api.updateUserInfo(data)
@@ -129,21 +154,24 @@ function App() {
                       isOpen={isEditProfilePopupOpen}
                       onClose={closeAllPopups}
                       onUpdateUser={handleUpdateUser}
+                      onOverlayClose={handleOverlayClose}
                   />
 
                   <EditAvatarPopup
                       isOpen={isEditAvatarPopupOpen}
                       onClose={closeAllPopups}
                       onUpdateAvatar={handleUpdateAvatar}
+                      onOverlayClose={handleOverlayClose}
                   />
 
                   <AddPlacePopup
                       isOpen={isAddPlacePopupOpen}
                       onClose={closeAllPopups}
                       onAddPlace={handleAddPlaceSubmit}
+                      onOverlayClose={handleOverlayClose}
                   />
 
-                  <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+                  <ImagePopup card={selectedCard} onClose={closeAllPopups} onOverlayClose={handleOverlayClose} />
               </div>
           </div>
       </CurrentUserContext.Provider>

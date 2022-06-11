@@ -16,11 +16,8 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-      setIsLoading(true);
-
       Promise.all([api.getUserInfo(), api.getInitialCards()])
             .then(([userData, cardsData]) => {
                 setCurrentUser(userData);
@@ -29,9 +26,6 @@ function App() {
             .catch((err) => {
                 console.log(`Ошибка ${err}`);
             })
-          .finally(() => {
-              setIsLoading(false);
-          })
   }, [])
 
   const handleEditAvatarClick = () => {
@@ -63,7 +57,7 @@ function App() {
       }
   }
 
-    //закрытие попапов по Esc
+  //закрытие попапов по Esc
   function handleEscClose(evt) {
         if (evt.key === 'Escape') {
             closeAllPopups();

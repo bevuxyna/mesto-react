@@ -33,8 +33,8 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
         <li className="element">
             <img className="element__image" src={card.link} alt={card.name} onClick={handleClick} />
             <button
-                className={cardDeleteButtonClassName} t
-                ype="button"
+                className={cardDeleteButtonClassName}
+                type="button"
                 onClick={handleDeleteClick}>
             </button>
             <div className="element__info">

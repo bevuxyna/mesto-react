@@ -19,8 +19,8 @@ function Main(props) {
                         <div className="profile__item">
                             <h1 className="profile__author">{currentUser.name}</h1>
                             <button
-                                type="button" c
-                                lassName="profile__edit-button"
+                                type="button"
+                                className="profile__edit-button"
                                 aria-label="Редактировать профиль"
                                 onClick={props.onEditProfile}></button>
                         </div>

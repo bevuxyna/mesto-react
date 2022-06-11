@@ -3,6 +3,8 @@ import Footer from "./Footer";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 import api from "../utils/Api";
 import React, {useState, useEffect} from "react";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
@@ -48,9 +50,6 @@ function App() {
             .catch((err) => {
                 console.log(`Ошибка ${err}`);
             })
-            .finally(() => {
-
-            });
     }, [])
 
     function handleCardLike(card) {
@@ -68,8 +67,30 @@ function App() {
     function handleCardDelete(card) {
         api.deleteCard(card._id)
             .then(() => {
-                //обновение стейта cards с помощью метода filter: создаём копию массива, исключив из него удалённую карточку
+                //обновление стейта cards с помощью метода filter: создаём копию массива, исключив из него удалённую карточку
                 setCards((state) => state.filter((c) => c._id !== card._id && c));
+            })
+            .catch((err) => {
+                console.log(`Ошибка ${err}`);
+            })
+    }
+
+    function handleUpdateUser(data) {
+        api.updateUserInfo(data)
+            .then((res) => {
+                setCurrentUser(res);
+                closeAllPopups();
+            })
+            .catch((err) => {
+                console.log(`Ошибка ${err}`);
+            })
+    }
+
+    function handleUpdateAvatar(data) {
+        api.updateAvatar(data)
+            .then(res => {
+                setCurrentUser(res);
+                closeAllPopups();
             })
             .catch((err) => {
                 console.log(`Ошибка ${err}`);
@@ -94,32 +115,20 @@ function App() {
 
                   <Footer />
 
-                  <PopupWithForm
-                      name={'profile'}
-                      title='Редактировать профиль'
+
+                  <EditProfilePopup
                       isOpen={isEditProfilePopupOpen}
                       onClose={closeAllPopups}
-                      buttonText='Сохранить'
-                  >
-                      <input type="text" name="name" required placeholder="Имя" className="popup__input popup__input_type_name"
-                             id="name" minLength="2" maxLength="40" />
-                      <span className="popup__error name-error"></span>
-                      <input type="text" name="about" required placeholder="О себе"
-                             className="popup__input popup__input_type_about" id="about" minLength="2" maxLength="200" />
-                      <span className="popup__error about-error"></span>
-                  </PopupWithForm>
+                      onUpdateUser={handleUpdateUser}
+                  />
 
-
-                  <PopupWithForm
-                      name={'avatar'}
-                      title='Обновить аватар'
+                  <EditAvatarPopup
                       isOpen={isEditAvatarPopupOpen}
                       onClose={closeAllPopups}
-                      buttonText='Сохранить'
-                  >
-                      <input type="url" name="avatar" required placeholder="Ссылка на картинку" className="popup__input popup__input_type_avatar" id="avatar-link" />
-                      <span className="popup__error avatar-link-error"></span>
-                  </PopupWithForm>
+                      onUpdateAvatar={handleUpdateAvatar}
+                  />
+
+
 
 
                   <PopupWithForm

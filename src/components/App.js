@@ -73,7 +73,9 @@ function App() {
   function handleUpdateUser(data) {
         api.updateUserInfo(data)
             .then((res) => {
+                //обновляем стейт currentUser из полученных данных
                 setCurrentUser(res);
+
                 closeAllPopups();
             })
             .catch((err) => {
@@ -84,7 +86,9 @@ function App() {
   function handleUpdateAvatar(data) {
         api.updateAvatar(data)
             .then(res => {
+                //обновляем стейт currentUser из полученных данных
                 setCurrentUser(res);
+
                 closeAllPopups();
             })
             .catch((err) => {
@@ -93,16 +97,18 @@ function App() {
     }
 
   function handleCardLike(card) {
-        const isLiked = card.likes.some(item => item._id === currentUser._id);
+      // Проверяем, есть ли уже лайк на этой карточке
+      const isLiked = card.likes.some(item => item._id === currentUser._id);
 
-        api.changeLikeCardStatus(card._id, !isLiked)
-            .then((newCard) => {
+      // Отправляем запрос в API и получаем обновлённые данные карточки
+      api.changeLikeCardStatus(card._id, !isLiked)
+          .then((newCard) => {
                 setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-            })
-            .catch((err) => {
+          })
+          .catch((err) => {
                 console.log(`Ошибка ${err}`);
-            })
-    }
+          })
+  }
 
   function handleCardDelete(card) {
       api.deleteCard(card._id)
@@ -118,7 +124,9 @@ function App() {
   function handleAddPlaceSubmit(data) {
       api.sendCard(data)
           .then((newCard) => {
+              //обновляем стейт cards с помощью расширенной копии текущего массива
               setCards([newCard, ...cards]);
+
               closeAllPopups();
           })
           .catch((err) => {
@@ -165,7 +173,11 @@ function App() {
                       onOverlayClose={handleOverlayClose}
                   />
 
-                  <ImagePopup card={selectedCard} onClose={closeAllPopups} onOverlayClose={handleOverlayClose} />
+                  <ImagePopup
+                      card={selectedCard}
+                      onClose={closeAllPopups}
+                      onOverlayClose={handleOverlayClose}
+                  />
               </div>
           </div>
       </CurrentUserContext.Provider>

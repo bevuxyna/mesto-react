@@ -44,41 +44,6 @@ export const cardTemplate = '.elements__item';
 export const placeElement = '.elements__box';
 
 
-import baikalImage from '../styles/images/philipp-trubchenko-08lvM7w-G30-unsplash.jpg';
-import elbrusImage from '../styles/images/dmitrii-vaccinium-9qsK2QHidmg-unsplash.jpg';
-import teleckoeImage from '../styles/images/nick-night-v_0g5mGwHM0-unsplash.jpg';
-import arhyzImage from '../styles/images/denis-zelenykh-CvSvsqdFLcI-unsplash.jpg';
-import ruskealaImage from '../styles/images/victor-malyushev-qGcnIyX0SZU-unsplash (1).jpg';
-import ostrovRusskiyImage from '../styles/images/fedor-shlyapnikov-mc3sRmbEA2o-unsplash (1).jpg';
-
-//Массив карточек мест
-export const initialCards = [
-    {
-        name: 'Байкал',
-        link: baikalImage
-    },
-    {
-        name: 'Эльбрус',
-        link: elbrusImage
-    },
-    {
-        name: 'Телецкое, Республика Алтай',
-        link: teleckoeImage
-    },
-    {
-        name: 'Архыз',
-        link: arhyzImage
-    },
-    {
-        name: 'Рускеала',
-        link: ruskealaImage
-    },
-    {
-        name: 'Остров Русский',
-        link: ostrovRusskiyImage
-    }
-];
-
 // Функция принимает как объект настроек все нужные функциям классы и селекторы элементов
 export const validationSettings = {
     formSelector: '.popup__form',

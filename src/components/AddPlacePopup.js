@@ -37,9 +37,27 @@ function AddPlacePopup(props) {
             onSubmit={handleSubmit}
             onOverlayClose={props.onOverlayClose}
         >
-            <input type="text" name="name" required placeholder="Название" className="popup__input popup__input_type_place" id="place" minLength="2" maxLength="30" value={name} onChange={handleCardName} />
+            <input
+                type="text"
+                name="name"
+                required
+                placeholder="Название"
+                className="popup__input popup__input_type_place"
+                id="place"
+                minLength="2"
+                maxLength="30"
+                value={name}
+                onChange={handleCardName} />
             <span className="popup__error place-error"></span>
-            <input type="url" name="link" required placeholder="Ссылка на картинку" className="popup__input popup__input_type_link" id="link" value={link} onChange={handleCardLink} />
+            <input
+                type="url"
+                name="link"
+                required
+                placeholder="Ссылка на картинку"
+                className="popup__input popup__input_type_link"
+                id="link"
+                value={link}
+                onChange={handleCardLink} />
             <span className="popup__error link-error"></span>
         </PopupWithForm>
     )
